@@ -11,7 +11,6 @@ namespace TypePro
     {
         static void Main(string[] args)
         {
-            GetRandomTextFromTheInternet();
             CommandLine.Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
             {
                 string text = null;
