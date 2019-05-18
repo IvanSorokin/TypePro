@@ -16,6 +16,6 @@ namespace TypePro
 
         void Reset();
 
-        TypingStateChangedHandler PrintingStateChangedHandler { get; }
+        TypingStateChangedHandler TypingStateChangedHandler { get; }
     }
 }

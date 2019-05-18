@@ -21,8 +21,8 @@ namespace TypePro
             this.content = content;
             this.outputHandler = outputHandler;
             this.textLength = content.Select(x => x.Length).Sum();
-            if (outputHandler.PrintingStateChangedHandler != null)
-                OnChanged += outputHandler.PrintingStateChangedHandler;
+            if (outputHandler.TypingStateChangedHandler != null)
+                OnChanged += outputHandler.TypingStateChangedHandler;
         }
 
         public event TypingStateChangedHandler OnChanged;
@@ -68,8 +68,8 @@ namespace TypePro
         private TypingState GetPrintingState()
         {
             return new TypingState(currentErrorCount,
-                                     stopWatch.Elapsed.Seconds,
-                                     textLength);
+                                   stopWatch.Elapsed.Seconds,
+                                   textLength);
         }
     }
 }

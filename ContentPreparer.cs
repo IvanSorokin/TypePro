@@ -8,7 +8,7 @@ namespace TypePro
     {
         public string[] PrepareFromString(string str, int lineWidth, int textLength)
         {
-            var parts = str.Split(' ');
+            var parts = str.Split(' ').Select(x => x.Trim());
             var sb = new StringBuilder();
             var result = new List<string>();
             var currentTextLength = 0;

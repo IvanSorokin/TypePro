@@ -4,7 +4,7 @@ namespace TypePro
 {
     public class ConsoleOutputHandler : IOutputHandler
     {
-        public TypingStateChangedHandler PrintingStateChangedHandler => null;
+        public TypingStateChangedHandler TypingStateChangedHandler => null;
 
         public void Configure()
         {
@@ -24,7 +24,7 @@ namespace TypePro
         {
             Console.WriteLine();
             Console.WriteLine($"You did it in {result.ElapsedSeconds} seconds with {result.ErrorsCount} errors");
-            Console.WriteLine($"Chars per minute: {result.CharsPerMinute}");
+            Console.WriteLine($"Symbols per minute: {result.SymbolsPerMinute}");
         }
 
         public void Reset() => Console.ResetColor();

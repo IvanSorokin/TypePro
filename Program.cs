@@ -29,8 +29,8 @@ namespace TypePro
                 var content = new ContentPreparer().PrepareFromString(text, 80, options.TextLength);
 
                 var runner = new TypeProRunner(new ConsoleInputProvider(),
-                                                new ConsoleOutputHandler(),
-                                                content);
+                                               new ConsoleOutputHandler(),
+                                               content);
 
                 runner.Run();
             });
@@ -50,7 +50,7 @@ namespace TypePro
                 var regex = new Regex("<textarea(.*?)>(.*?)</textarea>", RegexOptions.Singleline);
                 var match = regex.Match(response);
 
-                return match.Groups[2].Value.Replace("\r", "").Replace("\n", "");
+                return match.Groups[2].Value.Replace("\r", " ").Replace("\n", " ");
             }
         }
     }
