@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,7 +13,19 @@ namespace TypePro
         {
             CommandLine.Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
             {
-                var text = options.Random ? GetRandomTextFromTheInternet() : GetDefaultText();
+                string text = null;
+
+                if (options.Random)
+                    text = GetRandomTextFromTheInternet();
+
+                if (options.Text != null)
+                    text = options.Text;
+
+                if (options.FilePath != null)
+                    text = File.ReadAllText(options.FilePath);
+
+                text = text ?? GetDefaultText();
+
                 var content = new ContentPreparer().PrepareFromString(text, 80, options.TextLength);
 
                 var runner = new TypeProRunner(new ConsoleInputProvider(),

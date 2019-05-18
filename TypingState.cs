@@ -9,7 +9,6 @@
             this.ErrorsCount = errorsCount;
             this.ElapsedSeconds = elapsedSeconds;
             this.TextLength = textLength;
-
         }
 
         public int ErrorsCount { get; }
