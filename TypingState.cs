@@ -14,6 +14,6 @@
         public int ErrorsCount { get; }
         public int ElapsedSeconds { get; }
         public int TextLength { get; }
-        public int CharsPerMinute => (int)(TextLength * 1.0 / ElapsedSeconds * 60);
+        public int SymbolsPerMinute => (int)(TextLength * 1.0 / ElapsedSeconds * 60);
     }
 }
