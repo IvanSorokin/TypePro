@@ -11,6 +11,7 @@ namespace TypePro
     {
         static void Main(string[] args)
         {
+            GetRandomTextFromTheInternet();
             CommandLine.Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
             {
                 string text = null;
@@ -45,12 +46,12 @@ namespace TypePro
         {
             using (WebClient client = new WebClient())
             {
-                var response = client.DownloadString("http://randomtextgenerator.com/");
+                var response = client.DownloadString("https://www.online-toolz.com/tools/random-text-generator.php");
 
-                var regex = new Regex(@"\<textarea.*\>(.*)\<\/textarea\>", RegexOptions.Singleline);
+                var regex = new Regex("<textarea(.*?)>(.*?)</textarea>", RegexOptions.Singleline);
                 var match = regex.Match(response);
 
-                return match.Groups[1].Value.Replace("\r", "").Replace("\n", "");
+                return match.Groups[2].Value.Replace("\r", "").Replace("\n", "");
             }
         }
     }
