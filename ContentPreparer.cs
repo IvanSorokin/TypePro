@@ -17,8 +17,21 @@ namespace TypePro
             {
                 if (currentTextLength + part.Length >= textLength)
                 {
-                    result.Add(sb.ToString());
-                    result.Add(string.Join("", part.Take(textLength - currentTextLength)));
+                    var substr = string.Join("", part.Take(textLength - currentTextLength));
+
+                    if (substr.Length + sb.Length <= lineWidth)
+                    {
+                        sb.Append(substr);
+                        result.Add(sb.ToString());
+                    }
+                    else
+                    {
+                        result.Add(sb.ToString());
+                        result.Add(substr);
+                    }
+
+                    sb.Clear();
+                    currentTextLength += substr.Length;
                     break;
                 }
 
@@ -34,7 +47,7 @@ namespace TypePro
                 currentTextLength += part.Length + 1;
             }
 
-            if (currentTextLength <= lineWidth && sb.Length > 0)
+            if (currentTextLength < lineWidth && sb.Length > 0)
                 result.Add(sb.ToString());
 
             return result.Select(x => x.TrimEnd()).ToArray();

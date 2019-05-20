@@ -23,6 +23,7 @@ namespace TypePro
                                Console.WriteLine();
                                Console.WriteLine($"You did it in {state.ElapsedSeconds} seconds with {state.ErrorsCount} errors");
                                Console.WriteLine($"Symbols per minute: {state.SymbolsPerMinute}");
+                               Console.WriteLine();
                            }
                            else
                                Console.SetCursorPosition(state.CursorLeft, state.CursorTop);
