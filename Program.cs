@@ -48,7 +48,7 @@ namespace TypePro
                 var regex = new Regex("<textarea(.*?)>(.*?)</textarea>", RegexOptions.Singleline);
                 var match = regex.Match(response);
 
-                return match.Groups[2].Value.Replace("\r", " ").Replace("\n", " ");
+                return match.Groups[2].Value.Replace("\r", " ").Replace("\n", " ").Trim();
             }
         }
     }

@@ -56,19 +56,19 @@ namespace TypePro
                 else
                     currentErrorCount++;
 
-                OnChanged?.Invoke(GetPrintingState());
+                OnChanged?.Invoke(GetTypingState());
             }
 
             outputHandler.ResetColors();
             stopWatch.Stop();
 
-            outputHandler.HandleResult(GetPrintingState());
+            outputHandler.HandleResult(GetTypingState());
         }
 
-        private TypingState GetPrintingState()
+        private TypingState GetTypingState()
         {
             return new TypingState(currentErrorCount,
-                                   stopWatch.Elapsed.Seconds,
+                                   (int)stopWatch.Elapsed.TotalSeconds,
                                    textLength);
         }
     }

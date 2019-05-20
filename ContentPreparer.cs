@@ -34,7 +34,7 @@ namespace TypePro
                 currentTextLength += part.Length + 1;
             }
 
-            if (currentTextLength <= lineWidth)
+            if (currentTextLength <= lineWidth && sb.Length > 0)
                 result.Add(sb.ToString());
 
             return result.Select(x => x.TrimEnd()).ToArray();
