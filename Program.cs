@@ -5,7 +5,7 @@ using CommandLine;
 
 namespace TypePro
 {
-    partial class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -27,7 +27,7 @@ namespace TypePro
                 var content = new ContentPreparer().PrepareFromString(text, 80, options.TextLength);
 
                 var runner = new TypeProRunner(new ConsoleInputProvider(),
-                                               new ConsoleOutputHandler(),
+                                               new ConsoleActionHandler(),
                                                content);
 
                 runner.Run();
@@ -41,14 +41,14 @@ namespace TypePro
 
         private static string GetRandomTextFromTheInternet()
         {
-            using (WebClient client = new WebClient())
+            using (var client = new WebClient())
             {
                 var response = client.DownloadString("https://www.online-toolz.com/tools/random-text-generator.php");
 
                 var regex = new Regex("<textarea(.*?)>(.*?)</textarea>", RegexOptions.Singleline);
                 var match = regex.Match(response);
 
-                return match.Groups[2].Value.Replace("\r", " ").Replace("\n", " ").Trim();
+                return match.Groups[2].Value;
             }
         }
     }
