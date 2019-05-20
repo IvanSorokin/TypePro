@@ -8,7 +8,12 @@ namespace TypePro
     {
         public string[] PrepareFromString(string str, int lineWidth, int textLength)
         {
-            var parts = str.Replace("\r", " ").Replace("\n", " ").Split(' ').Select(x => x.Trim());
+            var parts = str.Replace("\r", " ")
+                           .Replace("\n", " ")
+                           .Split(' ')
+                           .Where(x => !string.IsNullOrWhiteSpace(x))
+                           .Select(x => x.Trim());
+            
             var sb = new StringBuilder();
             var result = new List<string>();
             var currentTextLength = 0;
