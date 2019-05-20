@@ -6,7 +6,7 @@ namespace TypePro
     {
         public TypingStateChangedHandler TypingStateChangedHandler => null;
 
-        public void Configure()
+        public void ConfigureColors()
         {
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -27,6 +27,6 @@ namespace TypePro
             Console.WriteLine($"Symbols per minute: {result.SymbolsPerMinute}");
         }
 
-        public void Reset() => Console.ResetColor();
+        public void ResetColors() => Console.ResetColor();
     }
 }

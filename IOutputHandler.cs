@@ -2,7 +2,7 @@ namespace TypePro
 {
     public interface IOutputHandler
     {
-        void Configure();
+        void ConfigureColors();
 
         void Write(char ch);
 
@@ -14,7 +14,7 @@ namespace TypePro
 
         void HandleResult(TypingState result);
 
-        void Reset();
+        void ResetColors();
 
         TypingStateChangedHandler TypingStateChangedHandler { get; }
     }

@@ -34,15 +34,15 @@ namespace TypePro
                 outputHandler.WriteLine(str);
             outputHandler.SetCursorPosition(0, 0);
 
-            outputHandler.Configure();
-
             stopWatch.Start();
 
             while (currentRowIndex < content.Length)
             {
+                outputHandler.ResetColors();
                 var key = inputProvider.GetKey();
                 if (key == content[currentRowIndex][currentLineIndex])
                 {
+                    outputHandler.ConfigureColors();
                     outputHandler.Write(key);
                     currentLineIndex++;
 
@@ -59,7 +59,7 @@ namespace TypePro
                 OnChanged?.Invoke(GetPrintingState());
             }
 
-            outputHandler.Reset();
+            outputHandler.ResetColors();
             stopWatch.Stop();
 
             outputHandler.HandleResult(GetPrintingState());

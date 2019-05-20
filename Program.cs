@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using CommandLine;
 
@@ -11,7 +9,7 @@ namespace TypePro
     {
         static void Main(string[] args)
         {
-            CommandLine.Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
+            Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
             {
                 string text = null;
 
