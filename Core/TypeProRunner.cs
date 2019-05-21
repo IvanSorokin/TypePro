@@ -12,6 +12,9 @@ namespace TypePro.Core
         private int currentErrorCount;
         private int currentLineIndex;
         private int currentRowIndex;
+        private int validSymbolsTyped;
+        private bool currentKeyIsValid;
+        private char lastTypedSymbol;
 
         public TypeProRunner(IInputProvider inputProvider, IActionHandler actionHandler, string[] content)
         {
@@ -32,11 +35,12 @@ namespace TypePro.Core
 
             while (currentRowIndex < content.Length)
             {
-                var keyIsValid = false;
-                var key = inputProvider.GetKey();
-                if (key == content[currentRowIndex][currentLineIndex])
+                currentKeyIsValid = false;
+                lastTypedSymbol = inputProvider.GetKey();
+                if (lastTypedSymbol == content[currentRowIndex][currentLineIndex])
                 {
-                    keyIsValid = true;
+                    currentKeyIsValid = true;
+                    validSymbolsTyped++;
                     currentLineIndex++;
 
                     if (content[currentRowIndex].Length <= currentLineIndex)
@@ -48,24 +52,24 @@ namespace TypePro.Core
                 else
                     currentErrorCount++;
 
-                OnChanged?.Invoke(GetTypingState(currentLineIndex, currentRowIndex, keyIsValid, key, false, (int)stopWatch.Elapsed.TotalSeconds));
+                var isFinished = currentRowIndex == content.Length;
+                OnChanged?.Invoke(GetTypingState(isFinished, (int)stopWatch.Elapsed.TotalSeconds));
             }
 
-            OnChanged?.Invoke(GetTypingState(currentLineIndex, currentRowIndex, false, ' ', true, (int)stopWatch.Elapsed.TotalSeconds));
-            
             stopWatch.Stop();
         }
 
-        private TypingState GetTypingState(int cursorLeft, int cursorTop, bool keyIsValid, char typedSymbol, bool finished, int elapsedSeconds)
+        private TypingState GetTypingState(bool finished, int elapsedSeconds)
         {
             return new TypingState(currentErrorCount,
                                    elapsedSeconds,
                                    textLength,
-                                   cursorLeft,
-                                   cursorTop,
-                                   keyIsValid,
-                                   typedSymbol,
-                                   finished);
+                                   currentLineIndex,
+                                   currentRowIndex,
+                                   currentKeyIsValid,
+                                   lastTypedSymbol,
+                                   finished,
+                                   validSymbolsTyped);
         }
     }
 }

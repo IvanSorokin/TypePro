@@ -14,7 +14,6 @@ namespace TypePro.Core
                        {
                            if (state.ValidSymbolTyped)
                            {
-                               
                                Console.BackgroundColor = ConsoleColor.Green;
                                Console.ForegroundColor = ConsoleColor.Black;
                                if (previousCharWasWrong)
@@ -34,13 +33,11 @@ namespace TypePro.Core
 
                            if (state.IsFinished)
                            {
-                               Console.WriteLine();
+                               Console.SetCursorPosition(0, state.CursorTop + 1);
                                Console.WriteLine($"You did it in {state.ElapsedSeconds} seconds with {state.ErrorsCount} errors");
                                Console.WriteLine($"Symbols per minute: {state.SymbolsPerMinute}");
                                Console.WriteLine();
                            }
-                           else
-                               Console.SetCursorPosition(state.CursorLeft, state.CursorTop);
                        };
             }
         }
