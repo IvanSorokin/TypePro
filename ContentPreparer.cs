@@ -5,6 +5,17 @@ namespace TypePro
 {
     public class ContentPreparer
     {
+        public string CutRandomString(string str, int limit)
+        {
+            var dotPositions = str.Select((x, i) => x == '.' ? i : -1)
+                                  .Where(x => x != -1 && x + limit < str.Length)
+                                  .ToList();
+
+            var part = str.Skip(dotPositions.PickRandom() + 1).Take(limit);
+            
+            return string.Join("", part);
+        }
+        
         public string[] PrepareFromString(string str, int lineWidth, int textLength)
         {
             var parts = str.Replace("\r", " ")

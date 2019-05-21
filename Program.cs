@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using CommandLine;
@@ -7,6 +8,8 @@ namespace TypePro
 {
     class Program
     {
+        private static readonly ContentPreparer contentPreparer = new ContentPreparer();
+
         static void Main(string[] args)
         {
             Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
@@ -22,9 +25,12 @@ namespace TypePro
                 if (options.FilePath != null)
                     text = File.ReadAllText(options.FilePath);
 
+                if (options.FromDb)
+                    text = GetTextFromDb(options.TextLength);
+
                 text = text ?? GetDefaultText();
 
-                var content = new ContentPreparer().PrepareFromString(text, options.LineWidth, options.TextLength);
+                var content = contentPreparer.PrepareFromString(text, options.LineWidth, options.TextLength);
 
                 var runner = new TypeProRunner(new ConsoleInputProvider(),
                                                new ConsoleActionHandler(),
@@ -32,6 +38,15 @@ namespace TypePro
 
                 runner.Run();
             });
+        }
+
+        private static string GetTextFromDb(int limit)
+        {
+            var paths = Directory.EnumerateFiles("Texts").ToList();
+            var randomPath = paths.PickRandom();
+            var str = File.ReadAllText(randomPath);
+
+            return contentPreparer.CutRandomString(str, limit);
         }
 
         private static string GetDefaultText()

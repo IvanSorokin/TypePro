@@ -9,6 +9,9 @@ namespace TypePro
 
         [Option('t', "from-text", Required = false, HelpText = "Text to work with")]
         public string Text { get; set; }
+        
+        [Option('d', "from-db", Required = false, HelpText = "Pick text from random txt file from Texts directory")]
+        public bool FromDb { get; set; }
 
         [Option('l', "text-length", Required = false, HelpText = "Desirable length of text", Default = 200)]
         public int TextLength { get; set; }
