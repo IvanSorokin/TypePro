@@ -1,4 +1,4 @@
-﻿namespace TypePro
+﻿namespace TypePro.Core
 {
     public delegate void TypingStateChangedHandler(TypingState state);
 

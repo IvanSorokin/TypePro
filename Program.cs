@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using CommandLine;
+using TypePro.Core;
 using TypePro.Helpers;
 
 namespace TypePro

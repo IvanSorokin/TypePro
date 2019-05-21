@@ -1,4 +1,4 @@
-namespace TypePro
+namespace TypePro.Core
 {
     public interface IInputProvider
     {

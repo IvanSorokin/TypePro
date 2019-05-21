@@ -1,6 +1,6 @@
 using System;
 
-namespace TypePro
+namespace TypePro.Core
 {
     public class ConsoleActionHandler : IActionHandler
     {
