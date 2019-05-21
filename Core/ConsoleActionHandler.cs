@@ -5,7 +5,8 @@ namespace TypePro.Core
     public class ConsoleActionHandler : IActionHandler
     {
         private bool previousCharWasWrong;
-        
+        private int rowsCount;
+
         public TypingStateChangedHandler TypingStateChangedHandler
         {
             get
@@ -34,9 +35,15 @@ namespace TypePro.Core
                            if (state.IsFinished)
                            {
                                Console.SetCursorPosition(0, state.CursorTop + 1);
-                               Console.WriteLine($"You did it in {state.ElapsedSeconds} seconds with {state.ErrorsCount} errors");
+                               Console.WriteLine($"You did it in {state.ElapsedSeconds:F} seconds with {state.ErrorsCount} errors");
                                Console.WriteLine($"Symbols per minute: {state.SymbolsPerMinute}");
                                Console.WriteLine();
+                           }
+                           else
+                           {
+                               Console.SetCursorPosition(0, rowsCount + 1);
+                               Console.WriteLine($"Symbols per minute: {state.SymbolsPerMinute}");
+                               Console.SetCursorPosition(state.CursorLeft, state.CursorTop);
                            }
                        };
             }
@@ -47,6 +54,7 @@ namespace TypePro.Core
             Console.Clear();
             foreach (var str in content)
                 Console.WriteLine(str);
+            rowsCount = content.Length;
             Console.SetCursorPosition(0, 0);
         }
     }

@@ -53,13 +53,13 @@ namespace TypePro.Core
                     currentErrorCount++;
 
                 var isFinished = currentRowIndex == content.Length;
-                OnChanged?.Invoke(GetTypingState(isFinished, (int)stopWatch.Elapsed.TotalSeconds));
+                OnChanged?.Invoke(GetTypingState(isFinished, stopWatch.Elapsed.TotalSeconds));
             }
 
             stopWatch.Stop();
         }
 
-        private TypingState GetTypingState(bool finished, int elapsedSeconds)
+        private TypingState GetTypingState(bool finished, double elapsedSeconds)
         {
             return new TypingState(currentErrorCount,
                                    elapsedSeconds,

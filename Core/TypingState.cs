@@ -5,7 +5,7 @@
     public class TypingState
     {
         public TypingState(int errorsCount,
-                           int elapsedSeconds,
+                           double elapsedSeconds,
                            int textLength,
                            int cursorLeft,
                            int cursorTop,
@@ -26,12 +26,12 @@
         }
 
         public int ErrorsCount { get; }
-        public int ElapsedSeconds { get; }
+        public double ElapsedSeconds { get; }
         public int CursorLeft { get; }
         public int CursorTop { get; }
         public int TextLength { get; }
         public int ValidSymbolsTyped { get; }
-        public int SymbolsPerMinute => (int) (ValidSymbolsTyped * 1.0 / ElapsedSeconds * 60);
+        public int SymbolsPerMinute => (int) (ValidSymbolsTyped / ElapsedSeconds * 60);
         public bool ValidSymbolTyped { get; }
         public char TypedSymbol { get; }
         public bool IsFinished { get; }
