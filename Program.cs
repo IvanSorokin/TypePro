@@ -13,7 +13,7 @@ namespace TypePro
 
         static void Main(string[] args)
         {
-            Parser.Default.ParseArguments<Options>(args).WithParsed(options =>
+            Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed(options =>
             {
                 string text = null;
 

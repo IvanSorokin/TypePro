@@ -2,7 +2,7 @@ using CommandLine;
 
 namespace TypePro
 {
-    public class Options
+    public class CommandLineOptions
     {
         [Option('f', "from-file", Required = false, HelpText = "Path to txt file")]
         public string FilePath { get; set; }

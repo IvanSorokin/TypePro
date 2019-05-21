@@ -4,6 +4,8 @@ namespace TypePro
 {
     public class ConsoleActionHandler : IActionHandler
     {
+        private bool previousCharWasWrong;
+        
         public TypingStateChangedHandler TypingStateChangedHandler
         {
             get
@@ -12,10 +14,22 @@ namespace TypePro
                        {
                            if (state.ValidSymbolTyped)
                            {
-                               Console.BackgroundColor = ConsoleColor.Yellow;
+                               
+                               Console.BackgroundColor = ConsoleColor.Green;
                                Console.ForegroundColor = ConsoleColor.Black;
+                               if (previousCharWasWrong)
+                               {
+                                   Console.BackgroundColor = ConsoleColor.Red;
+                                   Console.ForegroundColor = ConsoleColor.White;
+                               }
+
                                Console.Write(state.TypedSymbol);
                                Console.ResetColor();
+                               previousCharWasWrong = false;
+                           }
+                           else
+                           {
+                               previousCharWasWrong = true;
                            }
 
                            if (state.IsFinished)
