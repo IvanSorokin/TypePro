@@ -24,7 +24,7 @@ namespace TypePro
 
                 text = text ?? GetDefaultText();
 
-                var content = new ContentPreparer().PrepareFromString(text, 80, options.TextLength);
+                var content = new ContentPreparer().PrepareFromString(text, options.LineWidth, options.TextLength);
 
                 var runner = new TypeProRunner(new ConsoleInputProvider(),
                                                new ConsoleActionHandler(),

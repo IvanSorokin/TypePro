@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace TypePro
 {
@@ -14,48 +13,51 @@ namespace TypePro
                            .Where(x => !string.IsNullOrWhiteSpace(x))
                            .Select(x => x.Trim());
             
-            var sb = new StringBuilder();
             var result = new List<string>();
+            var acc = new List<string>();
             var currentTextLength = 0;
 
             foreach (var part in parts)
             {
-                if (currentTextLength + part.Length >= textLength)
+                if (currentTextLength + 1 + part.Length >= textLength)
                 {
                     var substr = string.Join("", part.Take(textLength - currentTextLength));
 
-                    if (substr.Length + sb.Length <= lineWidth)
+                    if (substr.Length + acc.Sum(x => x.Length + 1) <= lineWidth)
                     {
-                        sb.Append(substr);
-                        result.Add(sb.ToString());
+                        if (substr.Any())
+                            acc.Add(substr);
+                        result.Add(JoinOnSpace(acc));
                     }
                     else
                     {
-                        result.Add(sb.ToString());
-                        result.Add(substr);
+                        result.Add(JoinOnSpace(acc));
+                        if (substr.Any())
+                            result.Add(substr);
                     }
 
-                    sb.Clear();
-                    currentTextLength += substr.Length;
+                    acc.Clear();
                     break;
                 }
 
-                if (sb.Length + part.Length + 1 <= lineWidth)
-                    sb.Append(part + ' ');
+                if (acc.Sum(x => x.Length + 1) + part.Length <= lineWidth)
+                    acc.Add(part);
                 else
                 {
-                    result.Add(sb.ToString());
-                    sb.Clear();
-                    sb.Append(part + ' ');
+                    result.Add(JoinOnSpace(acc));
+                    acc.Clear();
+                    acc.Add(part);
                 }
 
                 currentTextLength += part.Length + 1;
             }
+            
+            if (acc.Any())
+                result.Add(JoinOnSpace(acc));
 
-            if (currentTextLength < lineWidth && sb.Length > 0)
-                result.Add(sb.ToString());
-
-            return result.Select(x => x.TrimEnd()).ToArray();
+            return result.ToArray();
         }
+
+        private static string JoinOnSpace(List<string> acc) => string.Join(" ", acc);
     }
 }
