@@ -15,6 +15,9 @@ namespace TypePro
         
         [Option('w', "from-wiki", Required = false, HelpText = "Pick text from random wiki page")]
         public bool FromWiki { get; set; }
+        
+        [Option('q', "from-wiki", Required = false, HelpText = "Pick text from quotes site")]
+        public bool FromQuotes { get; set; }
 
         [Option('l', "text-length", Required = false, HelpText = "Desirable length of text", Default = 200)]
         public int TextLength { get; set; }

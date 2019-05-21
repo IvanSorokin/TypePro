@@ -31,6 +31,9 @@ namespace TypePro
 
                 if (options.FromWiki)
                     text = GetRandomWikiPage();
+                
+                if (options.FromQuotes)
+                    text = GetRandomQuotePage();
 
                 text = text ?? GetDefaultText();
 
@@ -57,7 +60,19 @@ namespace TypePro
         {
             return "Hello stranger! This application should help you to type fast! Call --help for options.";
         }
+        
+        private static string GetRandomQuotePage()
+        {
+            using (var client = new WebClient())
+            {
+                var url = "http://quotesondesign.com/api/3.0/api-3.0.json?no_cache=%22%20+%20Math.floor(Math.random()*24000)";
+                var response = client.DownloadString(url);
+                var obj = JsonConvert.DeserializeObject<QuoteResponse>(response);
 
+                return obj.Quote;
+            }
+        }
+        
         private static string GetRandomWikiPage()
         {
             using (var client = new WebClient())
