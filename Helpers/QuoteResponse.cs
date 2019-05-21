@@ -1,4 +1,4 @@
-﻿namespace TypePro
+﻿namespace TypePro.Helpers
 {
     public class QuoteResponse
     {

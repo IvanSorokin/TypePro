@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TypePro
+namespace TypePro.Helpers
 {
     public class WikiResponse
     {

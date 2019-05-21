@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TypePro
+namespace TypePro.Helpers
 {
-    public class ContentPreparer
+    public static class ContentPreparer
     {
-        public string CutRandomString(string str, int limit)
+        public static string CutRandomString(string str, int limit)
         {
             var dotPositions = str.Select((x, i) => x == '.' ? i : -1)
                                   .Where(x => x != -1 && x + limit < str.Length)
@@ -16,7 +16,7 @@ namespace TypePro
             return string.Join("", part);
         }
         
-        public string[] PrepareFromString(string str, int lineWidth, int textLength)
+        public static string[] PrepareFromString(string str, int lineWidth, int textLength)
         {
             var parts = str.Replace("\r", " ")
                            .Replace("\n", " ")
