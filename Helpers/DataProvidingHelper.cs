@@ -26,11 +26,11 @@ namespace TypePro.Helpers
         {
             using (var client = new WebClient())
             {
-                var url = "http://quotesondesign.com/api/3.0/api-3.0.json?no_cache=%22%20+%20Math.floor(Math.random()*24000)";
+                var url = "http://quotesondesign.com/api/3.0/api-3.0.json";
                 var response = client.DownloadString(url);
                 var obj = JsonConvert.DeserializeObject<QuoteResponse>(response);
 
-                return obj.Quote;
+                return $"{obj.Quote} {obj.Author}.";
             }
         }
 
