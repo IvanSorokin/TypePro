@@ -7,11 +7,12 @@ namespace TypePro.Helpers
     {
         public static string CutRandomString(string str, int limit)
         {
-            var dotPositions = str.Select((x, i) => x == '.' ? i : -1)
+            var endChars = new[] {'.', '?', '!'};
+            var endPositions = str.Select((x, i) => endChars.Any(z => z == x) ? i : -1)
                                   .Where(x => x != -1 && x + limit < str.Length)
                                   .ToList();
 
-            var part = str.Skip(dotPositions.PickRandom() + 1).Take(limit);
+            var part = str.Skip(endPositions.PickRandom() + 1).Take(limit);
             
             return string.Join("", part);
         }
