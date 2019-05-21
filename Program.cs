@@ -36,7 +36,7 @@ namespace TypePro
 
         private static string GetDefaultText()
         {
-            return "Hello stranger! This application should help you to type fast!";
+            return "Hello stranger! This application should help you to type fast! Call --help for options.";
         }
 
         private static string GetRandomTextFromTheInternet()
