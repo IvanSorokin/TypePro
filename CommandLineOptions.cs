@@ -9,19 +9,19 @@ namespace TypePro
 
         [Option('t', "from-text", Required = false, HelpText = "Text to work with")]
         public string Text { get; set; }
-        
+
         [Option('d', "from-db", Required = false, HelpText = "Pick text from random txt file from Texts directory")]
         public bool FromDb { get; set; }
-        
+
         [Option('w', "from-wiki", Required = false, HelpText = "Pick text from random wiki page")]
         public bool FromWiki { get; set; }
-        
-        [Option('q', "from-wiki", Required = false, HelpText = "Pick text from quotes site")]
+
+        [Option('q', "from-quotes", Required = false, HelpText = "Pick text from quotes site")]
         public bool FromQuotes { get; set; }
 
         [Option('l', "text-length", Required = false, HelpText = "Desirable length of text", Default = 200)]
         public int TextLength { get; set; }
-        
+
         [Option("line-width", Required = false, HelpText = "Desirable length of each line", Default = 80)]
         public int LineWidth { get; set; }
 
