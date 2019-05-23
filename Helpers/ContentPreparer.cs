@@ -16,12 +16,29 @@ namespace TypePro.Helpers
             
             return string.Join("", part);
         }
+
+        private static string ReplaceSymbols(string str)
+        {
+            var replacements = new List<(string str, string replacement)>
+                          {
+                              ("—", "-"),
+                              ("“", "\""),
+                              ("”", "\""),
+                              ("\r", " "),
+                              ("\n", " ")
+                          };
+            foreach (var replacement in replacements)
+            {
+                str = str.Replace(replacement.str, replacement.replacement);
+            }
+
+            return str;
+        }
         
         public static string[] PrepareFromString(string str, int lineWidth, int textLength)
         {
-            var parts = str.Replace("\r", " ")
-                           .Replace("\n", " ")
-                           .Split(' ')
+            var strWithReplacements = ReplaceSymbols(str);
+            var parts = strWithReplacements.Split(' ')
                            .Where(x => !string.IsNullOrWhiteSpace(x))
                            .Select(x => x.Trim());
             
